@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用真实中国数据探索19个行业的就业规模、平均工资、工资增速和AI任务暴露。国家统计局经济普查2023年数据与2025年工资统计。">
+  <meta name="theme-color" content="#153d66">
+  <title>中国就业地图 · China Jobs Map</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23153d66'/%3E%3Cpath d='M6 6h11v20H6z' fill='%2396c5de'/%3E%3Cpath d='M19 6h7v9h-7z' fill='%23fff'/%3E%3Cpath d='M19 17h7v9h-7z' fill='%234d93b7'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="treemap.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="中国就业地图首页"><svg aria-hidden="true" viewBox="0 0 28 28"><rect x="1" y="1" width="12" height="26" rx="2"/><rect x="16" y="1" width="11" height="10" rx="2"/><rect x="16" y="14" width="11" height="13" rx="2"/></svg><span>中国就业地图<small>CHINA JOBS MAP</small></span></a>
+    <div class="toplinks"><a href="https://karpathy.ai/jobs/" target="_blank" rel="noopener noreferrer">原版灵感 ↗</a><button id="sources-open" class="quiet-button">数据与方法 <span aria-hidden="true">↗</span></button></div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div><div class="eyebrow">国家统计局公开数据 / 中国大陆</div><h1 id="page-title">看见中国的工作版图<span class="title-dot">。</span></h1><p>每块面积代表从业人数，颜色呈现你关心的指标。点击行业，查看数字与来源。</p></div>
+      <div class="total"><span id="total-label">法人单位从业人员 · 2023</span><strong id="total-value">4.29<small>亿人</small></strong><span id="total-sub">19 个行业门类</span></div>
+    </section>
+    <div class="scope-note"><span class="source-dot" aria-hidden="true"></span><span>这是<strong>行业地图</strong>。面积用 2023 年经济普查，工资用 2025 年统计；两个口径不同。未覆盖全部农业与自由职业者。</span></div>
+    <section class="workspace" aria-label="行业就业探索">
+      <div class="map-column">
+        <div class="controls">
+          <div class="metric-row"><span class="control-label">颜色</span><div class="metric-buttons" role="group" aria-label="颜色指标"><button data-metric="wage" aria-pressed="true">平均工资</button><button data-metric="growth" aria-pressed="false">工资增速</button><button data-metric="female" aria-pressed="false">女性占比</button><button data-metric="ai" aria-pressed="false">AI 任务暴露 <span class="estimate-tag">估计</span></button></div></div>
+          <div class="scope-row"><label>面积口径<select id="employment-scope"><option value="legal">法人单位</option><option value="individual">个体经营户</option></select></label><label id="wage-control">工资口径<select id="wage-scope"><option value="private">城镇私营单位</option><option value="nonprivate">城镇非私营单位</option></select></label><div class="map-caption"><span id="map-year">颜色 · 2025 年</span><span>面积 · 2023 年</span></div></div>
+        </div>
+        <div class="legend-row"><strong id="metric-title">税前年平均工资</strong><div class="legend"><span id="legend-low">4 万</span><span id="legend-gradient" class="legend-gradient"></span><span id="legend-high">15 万元</span><span class="missing-swatch"></span><span>无对应数据</span></div></div>
+        <div id="treemap" class="treemap" role="group" aria-label="行业矩形树图；每个行业可点击或用Tab键选择"></div>
+        <div class="map-bottom"><span id="metric-note">2025 年城镇私营单位税前年平均工资，非中位数、非到手收入。</span><span class="map-hint">点击方块查看详情 <span aria-hidden="true">→</span></span></div>
+      </div>
+      <aside class="detail" aria-label="选中行业详情" aria-live="polite" aria-atomic="true"><div id="industry-detail"></div></aside>
+    </section>
+    <details class="methodology" id="methodology"><summary><span>读图之前，了解这些数字</span><span class="summary-plus" aria-hidden="true">+</span></summary><div class="method-grid"><div><h2>面积是就业规模</h2><p>19 个行业门类来自第五次全国经济普查表2-3。法人单位与个体经营户分别展示，不把单位数当作就业人数。金融业与公共管理的个体经营户数据未发布，不补零。</p></div><div><h2>工资有自己的口径</h2><p>工资来自 2025 年城镇单位统计，覆盖城镇地域内就业人数5人及以上法人单位，不包括个体工商户或自由职业者。私营与非私营分别展示；不能按树图人数加权为全国平均工资。</p></div><div><h2>行业不等于职业</h2><p>原版按美国职业分类，本版按中国行业门类。一个行业包含许多职业。经济普查只涵盖农林牧渔专业及辅助性活动，与工资统计的完整农业门类不直接匹配，因此不映射其工资。</p></div><div><h2>AI 分数是探索性估计</h2><p>模型按行业一般任务结构给出0–10分，未使用细分职业任务或就业权重。高分表示工作可能被重塑，不是失业概率，也不是官方结论。未纳入机器人影响的完整评估。</p></div></div><p class="rounding-note">官方合计与行业行之和有四舍五入差异（法人单位人数相差0.2万人）。面积使用各行人数，顶部使用官方合计。工资增速为2025年较2024年的名义变化，不是就业增长或未来预测。</p></details>
+    <footer><span>中国就业地图 <span class="footer-divider">/</span> 数据核对于 2026.10.08</span><span>就业 2023 · 工资 2025 <button id="sources-footer">查看官方来源 ↗</button></span></footer>
+  </main>
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">数据与方法</h2><button id="sources-close" class="close-button" aria-label="关闭数据与方法">×</button></div><p class="dialog-lead">官方统计与模型估计分别标记，缺失数据保留为空。</p><div id="sources-list"></div><details class="ai-prompt"><summary>查看 AI 评分说明与提示词</summary><p id="ai-method"></p><pre id="ai-prompt"></pre></details><p class="dialog-foot">当前为人工核对的静态数据快照，不会自动更新。核对日期：2026-10-08。</p></dialog>
+  <noscript><p class="noscript">请启用 JavaScript 查看交互地图。原始数据可在 <a href="data.json">data.json</a> 中阅读。</p></noscript>
+</body>
+</html>
+
