@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用真实中国数据探索19个行业的就业规模、平均工资、工资增速和AI任务暴露。国家统计局经济普查2023年数据与2025年工资统计。">
+  <meta name="theme-color" content="#153d66">
+  <title>中国就业地图 · China Jobs Map</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23153d66'/%3E%3Cpath d='M6 6h11v20H6z' fill='%2396c5de'/%3E%3Cpath d='M19 6h7v9h-7z' fill='%23fff'/%3E%3Cpath d='M19 17h7v9h-7z' fill='%234d93b7'/%3E%3C/svg%3E">
+  <style>:root{--ink:#162b40;--muted:#60768a;--blue:#153d66;--accent:#2e6d98;--line:#d9e3ec;--paper:#fff;--back:#f5f8fb;--sans:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;--numeric:"Avenir Next","Helvetica Neue",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--back);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6}button,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #257fae;outline-offset:4px}.topbar{height:79px;display:flex;align-items:center;justify-content:space-between;padding:0 max(28px,calc((100vw - 1440px)/2));background:var(--paper);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:650;line-height:1.2;letter-spacing:.04em}.brand svg{width:28px;height:28px;fill:var(--blue)}.brand small{display:block;margin-top:5px;font-family:var(--numeric);font-size:9px;letter-spacing:.15em;font-weight:500;color:var(--muted)}.toplinks{display:flex;align-items:center;gap:26px;font-size:12px;color:var(--muted)}.quiet-button{border:0;background:transparent;color:var(--ink);padding:8px 0}.quiet-button span{margin-left:10px}main{max-width:1496px;padding:0 28px;margin:auto}.intro{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:34px 0 22px}.eyebrow{font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--muted)}h1{font-size:clamp(26px,3vw,38px);letter-spacing:-.035em;margin:7px 0 7px;font-weight:600;line-height:1.35}.title-dot{color:#5f9bbc}.intro p{color:var(--muted);font-size:13px;margin:0}.total{min-width:190px;display:flex;flex-direction:column;border-left:1px solid var(--line);padding-left:27px}.total>span{font-size:11px;color:var(--muted)}.total strong{font-family:var(--numeric);font-size:42px;letter-spacing:-.055em;line-height:1.35;font-weight:500;color:var(--blue)}.total strong small{font-family:var(--sans);font-size:15px;margin-left:7px;letter-spacing:0}.scope-note{display:flex;gap:9px;align-items:baseline;font-size:11px;color:#56718a;margin-bottom:22px}.scope-note strong{font-weight:600}.source-dot{background:#679bbb;width:5px;height:5px;flex:none;border-radius:50%;align-self:center}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 288px;align-items:start;gap:24px}.map-column{min-width:0}.controls{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 17px 12px}.metric-row{display:flex;align-items:center;gap:16px}.control-label{font-size:11px;color:var(--muted);white-space:nowrap}.metric-buttons{display:flex;gap:4px;flex-wrap:wrap}.metric-buttons button{border:1px solid transparent;background:transparent;border-radius:5px;padding:7px 12px;font-size:12px;color:#5d7082;white-space:nowrap}.metric-buttons button:hover{background:#f0f5f9}.metric-buttons button[aria-pressed=true]{background:#e8f0f7;color:var(--blue);border-color:#d2e2ee;font-weight:600}.estimate-tag{font-size:9px;border:1px solid #b9c7d5;padding:0 3px;border-radius:3px;margin-left:3px;font-weight:400}.scope-row{margin-top:12px;padding-top:12px;border-top:1px solid #edf1f5;display:flex;align-items:center;gap:20px}.scope-row label{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted)}select{background:transparent;color:var(--ink);border:0;padding:2px 20px 2px 1px;font-size:11px;cursor:pointer;border-radius:3px}.map-caption{margin-left:auto;display:flex;gap:16px;color:var(--muted);font-size:10px;white-space:nowrap}.legend-row{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:18px 0 10px;font-size:10px;color:var(--muted)}.legend-row>strong{font-size:11px;font-weight:500;color:#3c5268}.legend{display:flex;gap:7px;align-items:center;font-family:var(--numeric),var(--sans);font-size:10px}.legend-gradient{height:7px;width:100px;border-radius:3px;background:linear-gradient(to right,#e8f1f7,#153d66)}.missing-swatch{height:8px;width:8px;margin-left:6px;background:#e1e6ec}.treemap{position:relative;width:100%;height:560px;background:#f5f8fb;border-radius:5px;overflow:hidden}.tile{position:absolute;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;text-align:left;border:2px solid var(--back);border-radius:5px;padding:clamp(5px,1vw,14px);overflow:hidden;line-height:1.3;box-shadow:inset 0 0 0 1px #ffffff10}.tile:hover{box-shadow:inset 0 0 0 2px currentColor;z-index:1}.tile.selected{box-shadow:inset 0 0 0 2px currentColor}.tile.selected:after{content:"↗";position:absolute;right:9px;top:8px;font-size:14px;opacity:.8}.tile:focus-visible{outline:0;box-shadow:inset 0 0 0 3px currentColor;z-index:2}.tile-code{font-family:var(--numeric);position:absolute;left:13px;top:11px;font-size:10px;opacity:.6;font-weight:500}.tile-name{font-weight:550;font-size:clamp(11px,1.15vw,17px);line-height:1.4;overflow-wrap:anywhere}.tile-number{font-family:var(--numeric),var(--sans);font-size:clamp(11px,1.1vw,16px);letter-spacing:.015em;opacity:.9;margin-top:7px;white-space:nowrap}.tile-employment{font-size:10px;opacity:.72;margin-top:4px;white-space:nowrap}.tile.medium .tile-name{font-size:12px}.tile.medium .tile-number{font-size:11px;margin-top:5px}.tile.medium .tile-employment,.tile.small .tile-code,.tile.small .tile-employment{display:none}.tile.small{padding:6px;justify-content:center}.tile.small .tile-name{font-size:10px;line-height:1.3}.tile.small .tile-number{font-size:10px;margin-top:4px}.tile.tiny .tile-number{display:none}.tile.missing{background:repeating-linear-gradient(135deg,#e7ebf0,#e7ebf0 4px,#e1e6ec 4px,#e1e6ec 5px)!important;color:#536879!important}.map-bottom{display:flex;justify-content:space-between;align-items:baseline;gap:15px;color:var(--muted);font-size:10px;padding:13px 1px}.map-hint{white-space:nowrap}.map-hint span{margin-left:9px}.detail{border-top:3px solid var(--blue);padding:20px 0 0}.detail-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--muted);letter-spacing:.04em}.industry-code{font-family:var(--numeric);font-size:11px;display:inline-flex;justify-content:center;align-items:center;width:24px;height:24px;border:1px solid var(--line);border-radius:4px;color:var(--blue)}.detail h2{font-weight:550;font-size:22px;line-height:1.45;margin:14px 0 5px}.detail-category{font-size:11px;color:var(--muted);margin:0 0 21px}.detail-count{font-size:34px;font-family:var(--numeric);letter-spacing:-.035em;line-height:1.25}.detail-count small{font:12px var(--sans);letter-spacing:0;margin-left:5px}.detail-count-label{font-size:11px;color:var(--muted);margin-top:7px}.share-track{height:4px;border-radius:3px;background:#e0e9f0;margin:13px 0 7px;overflow:hidden}.share-fill{height:100%;background:#3a7297}.share-caption{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.detail-stats{margin:24px 0 0;padding:0}.detail-stats>div{padding:13px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.detail-stats dt{font-size:11px;color:var(--muted)}.detail-stats dt small{display:block;font-size:9px;margin-top:2px}.detail-stats dd{margin:0;text-align:right;font-family:var(--numeric),var(--sans);font-size:16px;line-height:1.3}.detail-stats dd small{font-size:10px;color:var(--muted);display:block;margin-top:3px}.detail-ai{border-top:1px solid var(--line);padding-top:15px;margin-top:4px}.ai-score-line{display:flex;align-items:center;justify-content:space-between}.ai-score-line>span{font-size:11px;color:var(--muted)}.ai-score-line strong{font-family:var(--numeric);font-size:18px;font-weight:550}.ai-score-line small{font-size:11px;font-weight:400;color:var(--muted)}.detail-ai p{font-size:11px;color:#4e667c;line-height:1.9;margin:10px 0 6px}.ai-caveat{font-size:9px!important;color:#778a9c!important}.detail-sources{padding-top:15px;margin-top:14px;border-top:1px solid var(--line);display:flex;gap:15px;font-size:10px;color:var(--accent)}.detail-sources a:hover{text-decoration:underline}.methodology{border-top:1px solid var(--line);margin-top:24px}.methodology>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:17px 0;color:var(--muted);font-size:12px}.methodology>summary::-webkit-details-marker{display:none}.summary-plus{font-size:19px}.methodology[open] .summary-plus{transform:rotate(45deg)}.method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding:5px 0 8px}.method-grid h2{font-size:12px;font-weight:600;margin:0 0 9px}.method-grid p{font-size:11px;color:var(--muted);line-height:1.9;margin:0}.rounding-note{font-size:10px;color:var(--muted);padding-bottom:12px}footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--line);padding:20px 0 25px;color:#8596a6;font-size:10px}.footer-divider{margin:0 10px}footer button{background:none;border:0;padding:0;margin-left:17px;color:var(--accent);font-size:10px}.tooltip{position:fixed;z-index:10;pointer-events:none;max-width:275px;padding:12px 15px;border:1px solid #314e66;background:#17334bef;color:#fff;box-shadow:0 8px 25px #162b4020;border-radius:6px;font-size:11px;line-height:1.8}.tooltip strong{display:block;font-size:12px}.tooltip span{color:#cfdfeb}dialog{border:1px solid var(--line);border-radius:12px;width:min(640px,calc(100vw - 32px));padding:27px 30px;max-height:85vh;color:var(--ink);box-shadow:0 20px 80px #162b4033}dialog::backdrop{background:#142a4066;backdrop-filter:blur(3px)}.dialog-top{display:flex;justify-content:space-between;align-items:center}.dialog-top h2{font-size:22px;margin:0;font-weight:600}.close-button{border:0;background:none;color:var(--muted);font-size:25px;padding:0 3px;line-height:1}.dialog-lead{color:var(--muted);font-size:12px;margin:12px 0 24px}.source-item{border-top:1px solid var(--line);padding:18px 0}.source-item a{color:var(--accent);font-size:13px;font-weight:550}.source-item p{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.9}.source-item .source-meta{font-family:var(--numeric),var(--sans);font-size:10px}.ai-prompt{border-top:1px solid var(--line);padding-top:18px}.ai-prompt summary{cursor:pointer;font-size:12px}.ai-prompt p{font-size:11px;color:var(--muted)}.ai-prompt pre{white-space:pre-wrap;font-family:var(--sans);font-size:11px;line-height:1.9;background:#f3f7fa;padding:16px;border-radius:6px}.dialog-foot{color:var(--muted);font-size:10px;margin-top:22px}.noscript{padding:20px}
+@media(min-width:1500px){.treemap{height:630px}}@media(max-width:1150px){.workspace{grid-template-columns:minmax(0,1fr) 248px;gap:20px}.map-caption{display:none}.treemap{height:535px}.map-hint{display:none}.metric-buttons button{padding:7px 9px}.detail h2{font-size:20px}}@media(max-width:900px){.workspace{grid-template-columns:1fr}.detail{margin-top:4px}.detail-stats{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}.detail-ai p{max-width:650px}.detail-count{font-size:30px}.share-track,.share-caption{max-width:400px}.method-grid{grid-template-columns:1fr 1fr}.treemap{height:580px}.tile-name{font-size:16px}.tile-number{font-size:14px}.detail-sources{margin-top:18px}.total{min-width:160px}.map-caption{display:flex}}@media(max-width:600px){main{padding:0 16px}.topbar{padding:0 16px;height:68px}.brand{font-size:14px;gap:9px}.brand small{font-size:8px}.brand svg{width:25px;height:25px}.toplinks{gap:0}.toplinks>a{display:none}.quiet-button{font-size:11px}.intro{align-items:flex-start;padding:25px 0 16px;gap:12px}.eyebrow{font-size:9px}h1{font-size:24px;letter-spacing:-.06em;margin-top:9px;max-width:255px}.intro p{font-size:11px;max-width:260px;line-height:1.8}.total{min-width:88px;padding-left:13px;margin-top:20px}.total strong{font-size:29px}.total strong small{font-size:10px;margin-left:3px}.total>span{font-size:8px}.scope-note{font-size:10px;margin-bottom:17px;align-items:flex-start}.source-dot{margin-top:6px;align-self:flex-start}.controls{padding:10px 10px 9px}.metric-row{gap:7px;align-items:flex-start}.control-label{margin-top:7px;font-size:10px}.metric-buttons{gap:1px;flex:1;justify-content:space-between}.metric-buttons button{padding:7px 6px;font-size:10px}.estimate-tag{font-size:8px;margin-left:1px;padding:0 2px}.scope-row{gap:12px;margin-top:7px;padding-top:9px;flex-wrap:wrap}.scope-row label{font-size:9px;gap:5px}select{font-size:10px;padding-right:15px}.map-caption{display:none}.legend-row{margin-top:14px;font-size:9px;gap:5px;align-items:flex-start}.legend-row>strong{font-size:10px;max-width:110px}.legend{font-size:9px;gap:4px}.legend-gradient{width:55px}.missing-swatch{margin-left:2px;width:7px;height:7px}.treemap{height:560px}.tile{border-width:1.5px;padding:9px;border-radius:4px}.tile-name{font-size:12px}.tile-number{font-size:11px}.tile-code{left:9px;top:8px;font-size:9px}.tile-employment{font-size:9px}.tile.medium .tile-name{font-size:10px}.tile.medium .tile-number{font-size:10px}.tile.small{padding:4px}.tile.small .tile-name{font-size:9px}.tile.small .tile-number{font-size:9px}.tile.selected:after{font-size:10px;right:5px;top:5px}.map-bottom{font-size:9px;line-height:1.8;padding-top:10px}.detail{padding-top:16px}.detail h2{margin-top:10px;font-size:20px}.detail-category{margin-bottom:15px}.detail-stats{gap:0 18px;margin-top:18px}.detail-stats dt{font-size:10px}.detail-stats dd{font-size:14px}.detail-stats>div{gap:8px}.method-grid{gap:20px;grid-template-columns:1fr}.methodology{margin-top:15px}footer{flex-direction:column;gap:5px;font-size:9px;padding:16px 0 22px}footer button{margin-left:10px}dialog{padding:22px}.tooltip{max-width:230px}}
+@media(prefers-reduced-motion:no-preference){.tile{transition:background-color .25s,color .25s}.summary-plus{transition:transform .2s}}[hidden]{display:none!important}
+</style>
+  
+  
+  
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="中国就业地图首页"><svg aria-hidden="true" viewBox="0 0 28 28"><rect x="1" y="1" width="12" height="26" rx="2"/><rect x="16" y="1" width="11" height="10" rx="2"/><rect x="16" y="14" width="11" height="13" rx="2"/></svg><span>中国就业地图<small>CHINA JOBS MAP</small></span></a>
+    <div class="toplinks"><a href="https://karpathy.ai/jobs/" target="_blank" rel="noopener noreferrer">原版灵感 ↗</a><button id="sources-open" class="quiet-button">数据与方法 <span aria-hidden="true">↗</span></button></div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div><div class="eyebrow">国家统计局公开数据 / 中国大陆</div><h1 id="page-title">看见中国的工作版图<span class="title-dot">。</span></h1><p>每块面积代表从业人数，颜色呈现你关心的指标。点击行业，查看数字与来源。</p></div>
+      <div class="total"><span id="total-label">法人单位从业人员 · 2023</span><strong id="total-value">4.29<small>亿人</small></strong><span id="total-sub">19 个行业门类</span></div>
+    </section>
+    <div class="scope-note"><span class="source-dot" aria-hidden="true"></span><span>这是<strong>行业地图</strong>。面积用 2023 年经济普查，工资用 2025 年统计；两个口径不同。未覆盖全部农业与自由职业者。</span></div>
+    <section class="workspace" aria-label="行业就业探索">
+      <div class="map-column">
+        <div class="controls">
+          <div class="metric-row"><span class="control-label">颜色</span><div class="metric-buttons" role="group" aria-label="颜色指标"><button data-metric="wage" aria-pressed="true">平均工资</button><button data-metric="growth" aria-pressed="false">工资增速</button><button data-metric="female" aria-pressed="false">女性占比</button><button data-metric="ai" aria-pressed="false">AI 任务暴露 <span class="estimate-tag">估计</span></button></div></div>
+          <div class="scope-row"><label>面积口径<select id="employment-scope"><option value="legal">法人单位</option><option value="individual">个体经营户</option></select></label><label id="wage-control">工资口径<select id="wage-scope"><option value="private">城镇私营单位</option><option value="nonprivate">城镇非私营单位</option></select></label><div class="map-caption"><span id="map-year">颜色 · 2025 年</span><span>面积 · 2023 年</span></div></div>
+        </div>
+        <div class="legend-row"><strong id="metric-title">税前年平均工资</strong><div class="legend"><span id="legend-low">4 万</span><span id="legend-gradient" class="legend-gradient"></span><span id="legend-high">15 万元</span><span class="missing-swatch"></span><span>无对应数据</span></div></div>
+        <div id="treemap" class="treemap" role="group" aria-label="行业矩形树图；每个行业可点击或用Tab键选择"></div>
+        <div class="map-bottom"><span id="metric-note">2025 年城镇私营单位税前年平均工资，非中位数、非到手收入。</span><span class="map-hint">点击方块查看详情 <span aria-hidden="true">→</span></span></div>
+      </div>
+      <aside class="detail" aria-label="选中行业详情" aria-live="polite" aria-atomic="true"><div id="industry-detail"></div></aside>
+    </section>
+    <details class="methodology" id="methodology"><summary><span>读图之前，了解这些数字</span><span class="summary-plus" aria-hidden="true">+</span></summary><div class="method-grid"><div><h2>面积是就业规模</h2><p>19 个行业门类来自第五次全国经济普查表2-3。法人单位与个体经营户分别展示，不把单位数当作就业人数。金融业与公共管理的个体经营户数据未发布，不补零。</p></div><div><h2>工资有自己的口径</h2><p>工资来自 2025 年城镇单位统计，覆盖城镇地域内就业人数5人及以上法人单位，不包括个体工商户或自由职业者。私营与非私营分别展示；不能按树图人数加权为全国平均工资。</p></div><div><h2>行业不等于职业</h2><p>原版按美国职业分类，本版按中国行业门类。一个行业包含许多职业。经济普查只涵盖农林牧渔专业及辅助性活动，与工资统计的完整农业门类不直接匹配，因此不映射其工资。</p></div><div><h2>AI 分数是探索性估计</h2><p>模型按行业一般任务结构给出0–10分，未使用细分职业任务或就业权重。高分表示工作可能被重塑，不是失业概率，也不是官方结论。未纳入机器人影响的完整评估。</p></div></div><p class="rounding-note">官方合计与行业行之和有四舍五入差异（法人单位人数相差0.2万人）。面积使用各行人数，顶部使用官方合计。工资增速为2025年较2024年的名义变化，不是就业增长或未来预测。</p></details>
+    <footer><span>中国就业地图 <span class="footer-divider">/</span> 数据核对于 2026.10.08</span><span>就业 2023 · 工资 2025 <button id="sources-footer">查看官方来源 ↗</button></span></footer>
+  </main>
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">数据与方法</h2><button id="sources-close" class="close-button" aria-label="关闭数据与方法">×</button></div><p class="dialog-lead">官方统计与模型估计分别标记，缺失数据保留为空。</p><div id="sources-list"></div><details class="ai-prompt"><summary>查看 AI 评分说明与提示词</summary><p id="ai-method"></p><pre id="ai-prompt"></pre></details><p class="dialog-foot">当前为人工核对的静态数据快照，不会自动更新。核对日期：2026-10-08。</p></dialog>
+  <noscript><p class="noscript">请启用 JavaScript 查看交互地图。原始数据可在 <a href="dist/data.json">data.json</a> 中阅读。</p></noscript>
+<script>window.CHINA_JOBS_DATA = {
+  "version": "1.0.0",
+  "verified_at": "2026-10-08",
+  "employment_year": 2023,
+  "wage_year": 2025,
+  "totals": {
+    "employment_legal_10k": 42898.4,
+    "female_legal_10k": 17047.4,
+    "employment_individual_10k": 17956.4,
+    "female_individual_10k": 8420.0
+  },
+  "row_sums": {
+    "employment_legal_10k": 42898.2,
+    "female_legal_10k": 17047.2,
+    "employment_individual_10k": 17956.4,
+    "female_individual_10k": 8420.0
+  },
+  "sources": [
+    {
+      "id": "economic_census_2023",
+      "title": "第五次全国经济普查公报（第二号）· 表2-3",
+      "url": "https://www.stats.gov.cn/zt_18555/zthd/lhfw/2025/2025_zgjjpc/202502/t20250207_1958632.html",
+      "published_at": "2024-12-26",
+      "reference_year": 2023,
+      "accessed_at": "2026-10-08",
+      "method": "Official web tables transcribed and validated",
+      "scope": "第二、三产业法人单位与个体经营户；农林牧渔仅含专业及辅助性活动"
+    },
+    {
+      "id": "urban_wages_2025",
+      "title": "2025年城镇单位就业人员年平均工资情况 · 表2、表5",
+      "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html",
+      "published_at": "2026-05-15",
+      "reference_year": 2025,
+      "accessed_at": "2026-10-08",
+      "method": "Official web tables transcribed and validated",
+      "scope": "城镇地域内就业人数5人及以上法人单位；不含个体工商户与自由职业者"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "employment-2023-web.txt",
+      "sha256": "d6605ed930a85e25b65760064d3225b8a0780ceb2fbd102842a099d4e956a327"
+    },
+    {
+      "file": "wages-2025-web.txt",
+      "sha256": "364ff974060017d226bf98de71725dcfdf046fad0e0f4568b022af0750da0c89"
+    }
+  ],
+  "ai": {
+    "author": "Codex",
+    "method": "模型基于行业一般任务结构的粗粒度主观评估；未使用职业任务微观数据、就业加权或外部模型API",
+    "date": "2026-10-08",
+    "scale": "0–10，表示当前数字AI对工作任务的潜在重塑程度",
+    "limitations": "非官方统计、非经验证研究、非失业概率；行业内不同职业差异很大；不含机器人与自动驾驶的全面影响",
+    "prompt": "按中国国民经济行业门类，估计当前数字AI对一般工作任务的影响程度，0至10分。考虑文本、代码、分析、内容生产与信息处理任务，以及现场操作、人际关系、监管责任等约束。分数仅用于探索，不是职业替代率，也不是就业预测。各行业给出评分理由，说明行业内异质性；不声称以就业人数对职业任务加权。"
+  },
+  "industries": [
+    {
+      "code": "A",
+      "name": "农、林、牧、渔业（专业及辅助性活动）",
+      "short_name": "农林牧渔辅助",
+      "employment_legal_10k": 133.5,
+      "female_legal_10k": 45.9,
+      "employment_individual_10k": 207.7,
+      "female_individual_10k": 72.1,
+      "wage_nonprivate_2025": null,
+      "wage_nonprivate_2024": null,
+      "growth_nonprivate": null,
+      "wage_private_2025": null,
+      "wage_private_2024": null,
+      "growth_private": null,
+      "ai_exposure": 2.0,
+      "ai_rationale": "核心工作依赖现场操作和自然环境。数字 AI 可协助记录与规划；这里仅包含经济普查中的专业及辅助性活动，不能代表全部农业就业。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": null
+    },
+    {
+      "code": "B",
+      "name": "采矿业",
+      "short_name": "采矿业",
+      "employment_legal_10k": 469.8,
+      "female_legal_10k": 73.2,
+      "employment_individual_10k": 6.8,
+      "female_individual_10k": 0.9,
+      "wage_nonprivate_2025": 143361.0,
+      "wage_nonprivate_2024": 140706.0,
+      "growth_nonprivate": 1.9,
+      "wage_private_2025": 79169.0,
+      "wage_private_2024": 76010.0,
+      "growth_private": 4.2,
+      "ai_exposure": 2.0,
+      "ai_rationale": "采掘和现场安全工作以实体操作为主。AI 可辅助地质分析与设备监测，但数字任务只是行业工作的一部分。",
+      "sector": "industrial",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "C",
+      "name": "制造业",
+      "short_name": "制造业",
+      "employment_legal_10k": 10481.5,
+      "female_legal_10k": 3959.0,
+      "employment_individual_10k": 1836.1,
+      "female_individual_10k": 884.1,
+      "wage_nonprivate_2025": 113594.0,
+      "wage_nonprivate_2024": 107987.0,
+      "growth_nonprivate": 5.2,
+      "wage_private_2025": 76055.0,
+      "wage_private_2024": 71467.0,
+      "growth_private": 6.4,
+      "ai_exposure": 3.0,
+      "ai_rationale": "生产装配依赖设备和现场操作，数字 AI 更容易介入设计、质检与生产计划。不同制造细分行业差异很大，分数不包含工业机器人的全部影响。",
+      "sector": "industrial",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "D",
+      "name": "电力、热力、燃气及水生产和供应业",
+      "short_name": "电力与公用事业",
+      "employment_legal_10k": 478.2,
+      "female_legal_10k": 124.8,
+      "employment_individual_10k": 29.6,
+      "female_individual_10k": 6.5,
+      "wage_nonprivate_2025": 160897.0,
+      "wage_nonprivate_2024": 150285.0,
+      "growth_nonprivate": 7.1,
+      "wage_private_2025": 66451.0,
+      "wage_private_2024": 63574.0,
+      "growth_private": 4.5,
+      "ai_exposure": 3.0,
+      "ai_rationale": "运维与安全工作依赖实体基础设施。AI 可支持负荷预测和异常检测，但现场检修与责任判断仍占重要位置。",
+      "sector": "industrial",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "E",
+      "name": "建筑业",
+      "short_name": "建筑业",
+      "employment_legal_10k": 5117.2,
+      "female_legal_10k": 990.1,
+      "employment_individual_10k": 961.8,
+      "female_individual_10k": 194.7,
+      "wage_nonprivate_2025": 92036.0,
+      "wage_nonprivate_2024": 89519.0,
+      "growth_nonprivate": 2.8,
+      "wage_private_2025": 66275.0,
+      "wage_private_2024": 65494.0,
+      "growth_private": 1.2,
+      "ai_exposure": 2.0,
+      "ai_rationale": "施工依赖现场环境、体力与协调。设计、预算和项目文书可被 AI 辅助，不能把这些任务的暴露程度等同于整个行业。",
+      "sector": "construction",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "F",
+      "name": "批发和零售业",
+      "short_name": "批发和零售业",
+      "employment_legal_10k": 5325.8,
+      "female_legal_10k": 2373.3,
+      "employment_individual_10k": 8224.1,
+      "female_individual_10k": 4186.0,
+      "wage_nonprivate_2025": 135749.0,
+      "wage_nonprivate_2024": 129658.0,
+      "growth_nonprivate": 4.7,
+      "wage_private_2025": 69622.0,
+      "wage_private_2024": 67059.0,
+      "growth_private": 3.8,
+      "ai_exposure": 5.0,
+      "ai_rationale": "线上商品内容、客服与经营分析的数字任务较多。线下陈列、仓储操作和面对面服务仍需现场人员，不同业态差异显著。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "G",
+      "name": "交通运输、仓储和邮政业",
+      "short_name": "交通运输与物流",
+      "employment_legal_10k": 1582.7,
+      "female_legal_10k": 420.2,
+      "employment_individual_10k": 1272.7,
+      "female_individual_10k": 256.4,
+      "wage_nonprivate_2025": 133981.0,
+      "wage_nonprivate_2024": 127889.0,
+      "growth_nonprivate": 4.8,
+      "wage_private_2025": 73133.0,
+      "wage_private_2024": 67973.0,
+      "growth_private": 7.6,
+      "ai_exposure": 4.0,
+      "ai_rationale": "调度、路线规划和物流文书可被 AI 辅助。运输和搬运仍以实体活动为主，本分数不预测自动驾驶或机器人替代的进度。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "H",
+      "name": "住宿和餐饮业",
+      "short_name": "住宿和餐饮业",
+      "employment_legal_10k": 894.2,
+      "female_legal_10k": 506.4,
+      "employment_individual_10k": 2541.0,
+      "female_individual_10k": 1412.2,
+      "wage_nonprivate_2025": 62461.0,
+      "wage_nonprivate_2024": 60240.0,
+      "growth_nonprivate": 3.7,
+      "wage_private_2025": 55123.0,
+      "wage_private_2024": 54042.0,
+      "growth_private": 2.0,
+      "ai_exposure": 3.0,
+      "ai_rationale": "烹饪、清洁与接待高度依赖现场服务。AI 可辅助预订、营销和排班，核心体验仍涉及人与实体环境。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "I",
+      "name": "信息传输、软件和信息技术服务业",
+      "short_name": "信息与软件服务",
+      "employment_legal_10k": 1517.9,
+      "female_legal_10k": 586.9,
+      "employment_individual_10k": 154.2,
+      "female_individual_10k": 70.6,
+      "wage_nonprivate_2025": 248752.0,
+      "wage_nonprivate_2024": 238966.0,
+      "growth_nonprivate": 4.1,
+      "wage_private_2025": 128166.0,
+      "wage_private_2024": 123193.0,
+      "growth_private": 4.0,
+      "ai_exposure": 9.0,
+      "ai_rationale": "编程、文档、数据分析和数字产品生产与当前 AI 能力重合较多。通信基础设施运维的暴露程度较低；高分表示任务可能重塑，不预测岗位消失。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "J",
+      "name": "金融业",
+      "short_name": "金融业",
+      "employment_legal_10k": 1248.4,
+      "female_legal_10k": 691.8,
+      "employment_individual_10k": null,
+      "female_individual_10k": null,
+      "wage_nonprivate_2025": 211164.0,
+      "wage_nonprivate_2024": 201883.0,
+      "growth_nonprivate": 4.6,
+      "wage_private_2025": 140451.0,
+      "wage_private_2024": 135339.0,
+      "growth_private": 3.8,
+      "ai_exposure": 8.0,
+      "ai_rationale": "金融行业包含大量信息处理、研究、报表与合规文书。AI 可辅助这些任务，但监管责任、信任关系与复杂决策构成约束。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "K",
+      "name": "房地产业",
+      "short_name": "房地产业",
+      "employment_legal_10k": 1443.5,
+      "female_legal_10k": 637.3,
+      "employment_individual_10k": 76.4,
+      "female_individual_10k": 36.3,
+      "wage_nonprivate_2025": 89679.0,
+      "wage_nonprivate_2024": 91912.0,
+      "growth_nonprivate": -2.4,
+      "wage_private_2025": 53338.0,
+      "wage_private_2024": 55979.0,
+      "growth_private": -4.7,
+      "ai_exposure": 5.0,
+      "ai_rationale": "营销、估价分析和交易文书含数字任务；物业管理与实地带看含大量现场工作。本行业同时包含开发、物业、中介与租赁等活动。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "L",
+      "name": "租赁和商务服务业",
+      "short_name": "租赁与商务服务",
+      "employment_legal_10k": 3906.6,
+      "female_legal_10k": 1463.1,
+      "employment_individual_10k": 501.6,
+      "female_individual_10k": 181.8,
+      "wage_nonprivate_2025": 110162.0,
+      "wage_nonprivate_2024": 110353.0,
+      "growth_nonprivate": -0.2,
+      "wage_private_2025": 68919.0,
+      "wage_private_2024": 69214.0,
+      "growth_private": -0.4,
+      "ai_exposure": 7.0,
+      "ai_rationale": "咨询、广告与行政支持有较多文本和分析任务。行业也包含保安、派遣与实体租赁，粗粒度分数不能反映每类工作。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "M",
+      "name": "科学研究和技术服务业",
+      "short_name": "科研与技术服务",
+      "employment_legal_10k": 1700.3,
+      "female_legal_10k": 609.2,
+      "employment_individual_10k": 111.7,
+      "female_individual_10k": 41.2,
+      "wage_nonprivate_2025": 182064.0,
+      "wage_nonprivate_2024": 175425.0,
+      "growth_nonprivate": 3.8,
+      "wage_private_2025": 83560.0,
+      "wage_private_2024": 82387.0,
+      "growth_private": 1.4,
+      "ai_exposure": 7.0,
+      "ai_rationale": "研究、工程分析、设计与技术文档能得到 AI 辅助。实验操作、实地勘察和工程责任仍依赖专业人员，细分活动暴露程度不同。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "N",
+      "name": "水利、环境和公共设施管理业",
+      "short_name": "水利与环境管理",
+      "employment_legal_10k": 485.5,
+      "female_legal_10k": 200.5,
+      "employment_individual_10k": 52.0,
+      "female_individual_10k": 23.0,
+      "wage_nonprivate_2025": 70172.0,
+      "wage_nonprivate_2024": 68315.0,
+      "growth_nonprivate": 2.7,
+      "wage_private_2025": 49527.0,
+      "wage_private_2024": 49007.0,
+      "growth_private": 1.1,
+      "ai_exposure": 3.0,
+      "ai_rationale": "设施维护、环境治理与现场巡检包含大量实体活动。AI 可支持监测分析与管理文书，现场实施仍需人员。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "O",
+      "name": "居民服务、修理和其他服务业",
+      "short_name": "居民服务与修理",
+      "employment_legal_10k": 673.6,
+      "female_legal_10k": 340.8,
+      "employment_individual_10k": 1497.4,
+      "female_individual_10k": 787.6,
+      "wage_nonprivate_2025": 70226.0,
+      "wage_nonprivate_2024": 68159.0,
+      "growth_nonprivate": 3.0,
+      "wage_private_2025": 52059.0,
+      "wage_private_2024": 52139.0,
+      "growth_private": -0.2,
+      "ai_exposure": 2.0,
+      "ai_rationale": "生活服务、维修与照护主要依赖动手操作和面对面互动。预约、营销和诊断信息可被 AI 辅助，难以代表核心现场工作。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "P",
+      "name": "教育",
+      "short_name": "教育",
+      "employment_legal_10k": 2677.0,
+      "female_legal_10k": 1779.9,
+      "employment_individual_10k": 77.1,
+      "female_individual_10k": 49.5,
+      "wage_nonprivate_2025": 133539.0,
+      "wage_nonprivate_2024": 126185.0,
+      "growth_nonprivate": 5.8,
+      "wage_private_2025": 63908.0,
+      "wage_private_2024": 60719.0,
+      "growth_private": 5.3,
+      "ai_exposure": 6.0,
+      "ai_rationale": "备课、材料生成和部分评价任务可由 AI 辅助。教学关系、课堂组织、学生照护与教育责任仍依赖人，学段和岗位差异很大。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "Q",
+      "name": "卫生和社会工作",
+      "short_name": "卫生和社会工作",
+      "employment_legal_10k": 1461.9,
+      "female_legal_10k": 1003.1,
+      "employment_individual_10k": 132.8,
+      "female_individual_10k": 72.5,
+      "wage_nonprivate_2025": 146266.0,
+      "wage_nonprivate_2024": 143173.0,
+      "growth_nonprivate": 2.2,
+      "wage_private_2025": 75631.0,
+      "wage_private_2024": 75287.0,
+      "growth_private": 0.5,
+      "ai_exposure": 5.0,
+      "ai_rationale": "病历、医学信息与影像分析可被 AI 辅助。护理、诊疗操作、沟通和法律责任包含大量现场与专业判断任务。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "R",
+      "name": "文化、体育和娱乐业",
+      "short_name": "文化体育与娱乐",
+      "employment_legal_10k": 519.5,
+      "female_legal_10k": 247.4,
+      "employment_individual_10k": 273.4,
+      "female_individual_10k": 144.6,
+      "wage_nonprivate_2025": 129447.0,
+      "wage_nonprivate_2024": 126040.0,
+      "growth_nonprivate": 2.7,
+      "wage_private_2025": 64015.0,
+      "wage_private_2024": 61669.0,
+      "growth_private": 3.8,
+      "ai_exposure": 7.0,
+      "ai_rationale": "数字内容、文案与视听制作与 AI 能力重合较多。体育、演出和场馆服务依赖实体活动，行业内部差异大。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    },
+    {
+      "code": "S",
+      "name": "公共管理、社会保障和社会组织",
+      "short_name": "公共管理与社会组织",
+      "employment_legal_10k": 2781.1,
+      "female_legal_10k": 994.3,
+      "employment_individual_10k": null,
+      "female_individual_10k": null,
+      "wage_nonprivate_2025": 119465.0,
+      "wage_nonprivate_2024": 114840.0,
+      "growth_nonprivate": 4.0,
+      "wage_private_2025": null,
+      "wage_private_2024": null,
+      "growth_private": null,
+      "ai_exposure": 6.0,
+      "ai_rationale": "行政文书、政策信息整理和服务咨询可得到 AI 辅助。公共决策、执法、组织协调与问责不能从数字任务暴露直接推断为替代。",
+      "sector": "services",
+      "employment_source": "economic_census_2023",
+      "wage_source": "urban_wages_2025"
+    }
+  ]
+};
+</script>
+<script>/* Squarified treemap: pure layout, no network or third-party runtime. */
+(function (root) {
+  'use strict';
+  function squarify(items, width, height) {
+    if (!(width > 0 && height > 0)) return [];
+    const positive = items.filter(d => Number.isFinite(d.value) && d.value > 0).sort((a, b) => b.value - a.value || a.id.localeCompare(b.id));
+    const total = positive.reduce((n, d) => n + d.value, 0);
+    if (!total) return [];
+    let pending = positive.map(d => ({ ...d, area: d.value / total * width * height }));
+    let box = { x: 0, y: 0, w: width, h: height };
+    const output = [];
+    function worst(row, side) {
+      if (!row.length) return Infinity;
+      const sum = row.reduce((n, d) => n + d.area, 0);
+      const min = Math.min(...row.map(d => d.area)), max = Math.max(...row.map(d => d.area));
+      return Math.max(side * side * max / (sum * sum), sum * sum / (side * side * min));
+    }
+    function place(row) {
+      const sum = row.reduce((n, d) => n + d.area, 0);
+      if (box.w >= box.h) {
+        const strip = Math.min(box.w, sum / box.h);
+        let y = box.y;
+        row.forEach((d, i) => {
+          const h = i === row.length - 1 ? box.y + box.h - y : d.area / strip;
+          output.push({ ...d, x: box.x, y, w: strip, h }); y += h;
+        });
+        box = { x: box.x + strip, y: box.y, w: Math.max(0, box.w - strip), h: box.h };
+      } else {
+        const strip = Math.min(box.h, sum / box.w);
+        let x = box.x;
+        row.forEach((d, i) => {
+          const w = i === row.length - 1 ? box.x + box.w - x : d.area / strip;
+          output.push({ ...d, x, y: box.y, w, h: strip }); x += w;
+        });
+        box = { x: box.x, y: box.y + strip, w: box.w, h: Math.max(0, box.h - strip) };
+      }
+    }
+    while (pending.length) {
+      const row = [pending.shift()];
+      const side = Math.min(box.w, box.h);
+      while (pending.length && worst([...row, pending[0]], side) <= worst(row, side)) row.push(pending.shift());
+      place(row);
+    }
+    return output;
+  }
+  root.ChinaTreemap = { squarify };
+  if (typeof module !== 'undefined') module.exports = root.ChinaTreemap;
+})(typeof window === 'undefined' ? globalThis : window);
+</script>
+<script>(function () {
+  'use strict';
+  const data = window.CHINA_JOBS_DATA;
+  const state = { metric: 'wage', employment: 'legal', ownership: 'private', selected: 'C' };
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const number = (n, digits = 1) => n === null ? '未发布' : n.toLocaleString('zh-CN', { maximumFractionDigits: digits });
+  const scopeName = () => state.employment === 'legal' ? '法人单位' : '个体经营户';
+  const ownershipName = () => state.ownership === 'private' ? '城镇私营单位' : '城镇非私营单位';
+  const total = () => data.totals[`employment_${state.employment}_10k`];
+  const count = d => d[`employment_${state.employment}_10k`];
+  const wages = d => d[`wage_${state.ownership}_2025`];
+  const growth = d => d[`growth_${state.ownership}`];
+  const female = d => count(d) ? d[`female_${state.employment}_10k`] / count(d) * 100 : null;
+  const metricValue = d => ({ wage: wages, growth, female, ai: d => d.ai_exposure })[state.metric](d);
+  const metricText = d => {
+    const v = metricValue(d);
+    if (v === null) return '无对应数据';
+    if (state.metric === 'wage') return `${(v / 10000).toFixed(2)} 万元 / 年`;
+    if (state.metric === 'growth') return `${v > 0 ? '+' : ''}${v.toFixed(1)}%`;
+    if (state.metric === 'female') return `${v.toFixed(1)}%`;
+    return `${v} / 10 · 估计`;
+  };
+  function mix(a, b, t) {
+    const rgb = c => [1, 3, 5].map(p => parseInt(c.slice(p, p + 2), 16));
+    const x = rgb(a), y = rgb(b);
+    return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('');
+  }
+  function color(v) {
+    if (v === null) return '#e1e6ec';
+    if (state.metric === 'wage') return mix('#e8f1f7', '#153d66', Math.min(1, Math.max(0, (v - 40000) / (state.ownership === 'private' ? 110000 : 210000))));
+    if (state.metric === 'growth') return v < 0 ? mix('#eef2f5', '#b55f76', Math.min(1, -v / 8)) : mix('#eef2f5', '#226f82', Math.min(1, v / 8));
+    if (state.metric === 'female') return mix('#e5eff6', '#57528e', Math.min(1, v / 75));
+    return v <= 5 ? mix('#67969c', '#d7dde3', v / 5) : mix('#d7dde3', '#92507b', (v - 5) / 5);
+  }
+  function textColor(hex) {
+    const rgb = [1, 3, 5].map(p => parseInt(hex.slice(p, p + 2), 16));
+    return rgb[0] * .299 + rgb[1] * .587 + rgb[2] * .114 < 155 ? '#ffffff' : '#19344c';
+  }
+  function visibleIndustries() { return data.industries.filter(d => count(d) !== null && count(d) > 0); }
+  function renderMap() {
+    const map = $('treemap'), width = map.clientWidth, height = map.clientHeight;
+    if (!width || !height) return;
+    const byCode = new Map(data.industries.map(d => [d.code, d]));
+    const positions = window.ChinaTreemap.squarify(visibleIndustries().map(d => ({ id: d.code, value: count(d) })), width, height);
+    const existing = new Map([...map.children].map(el => [el.dataset.code, el]));
+    positions.forEach(p => {
+      const d = byCode.get(p.id), v = metricValue(d), background = color(v);
+      let tile = existing.get(d.code);
+      if (!tile) {
+        tile = document.createElement('button'); tile.type = 'button'; tile.dataset.code = d.code;
+        tile.addEventListener('click', () => selectIndustry(d.code));
+        tile.addEventListener('pointerenter', e => showTooltip(d, e));
+        tile.addEventListener('pointermove', positionTooltip);
+        tile.addEventListener('pointerleave', hideTooltip);
+        tile.addEventListener('focus', hideTooltip);
+        map.append(tile);
+      }
+      existing.delete(d.code);
+      const small = p.w < 95 || p.h < 63, medium = !small && (p.w < 175 || p.h < 120), tiny = p.h < 43;
+      tile.className = `tile${small ? ' small' : medium ? ' medium' : ''}${tiny ? ' tiny' : ''}${state.selected === d.code ? ' selected' : ''}${v === null ? ' missing' : ''}`;
+      Object.assign(tile.style, { left: `${p.x}px`, top: `${p.y}px`, width: `${p.w}px`, height: `${p.h}px`, backgroundColor: background, color: textColor(background) });
+      tile.setAttribute('aria-pressed', String(state.selected === d.code));
+      tile.setAttribute('aria-label', `${d.name}，${scopeName()}从业人员${number(count(d))}万人，${$('metric-title').textContent}：${metricText(d)}，点击查看详情`);
+      tile.innerHTML = `<span class="tile-code">${d.code}${d.code === 'A' ? '*' : ''}</span><span class="tile-name">${esc(d.short_name)}</span><span class="tile-number">${metricText(d)}</span><span class="tile-employment">${number(count(d))} 万人</span>`;
+    });
+    existing.forEach(tile => tile.remove());
+  }
+  function renderDetail() {
+    const d = data.industries.find(d => d.code === state.selected);
+    const value = count(d), share = value === null ? null : value / total() * 100;
+    const g = growth(d), pay = wages(d);
+    const wageHint = d.code === 'A' ? '农业子范围未映射工资' : pay === null ? '此单位口径未发布' : '2025 · 税前年平均';
+    $('industry-detail').innerHTML = `<div class="detail-eyebrow"><span class="industry-code">${d.code}${d.code === 'A' ? '*' : ''}</span><span>行业详情 / 国民经济行业门类</span></div><h2>${esc(d.name)}</h2><p class="detail-category">${({ industrial: '工业', construction: '建筑业', services: '服务业（经济普查范围）' })[d.sector]} · ${scopeName()}</p><div class="detail-count">${number(value)}<small>${value === null ? '' : '万人'}</small></div><div class="detail-count-label">2023 年末从业人员${value === null ? ' · 原表为空，未补零' : ''}</div><div class="share-track"><div class="share-fill" style="width:${share || 0}%"></div></div><div class="share-caption"><span>占本口径就业人数</span><span>${share === null ? '—' : share.toFixed(2) + '%'}</span></div><dl class="detail-stats"><div><dt>平均工资<small>${ownershipName()}</small></dt><dd>${pay === null ? '无对应数据' : number(pay, 0) + ' 元'}<small>${wageHint}</small></dd></div><div><dt>工资增速<small>2025 较 2024 · 名义</small></dt><dd>${g === null ? '—' : (g > 0 ? '+' : '') + g.toFixed(1) + '%'}<small>非就业增速</small></dd></div><div><dt>女性从业人员<small>2023 · ${scopeName()}</small></dt><dd>${number(d[`female_${state.employment}_10k`])}${value === null ? '' : ' 万人'}<small>${female(d) === null ? '未发布' : '占比 ' + female(d).toFixed(1) + '%'}</small></dd></div></dl><div class="detail-ai"><div class="ai-score-line"><span>数字 AI 任务暴露 <span class="estimate-tag">模型估计</span></span><strong>${d.ai_exposure} <small>/ 10</small></strong></div><p>${esc(d.ai_rationale)}</p><p class="ai-caveat">行业层面的主观估计，不代表具体职业，也不是失业概率。</p></div><div class="detail-sources"><a href="${data.sources[0].url}" target="_blank" rel="noopener noreferrer">就业数据原表 ↗</a><a href="${data.sources[1].url}" target="_blank" rel="noopener noreferrer">工资数据原表 ↗</a></div>`;
+  }
+  function renderHeader() {
+    $('total-label').textContent = `${scopeName()}从业人员 · 2023`;
+    $('total-value').innerHTML = `${(total() / 10000).toFixed(2)}<small>亿人</small>`;
+    $('total-sub').textContent = `${visibleIndustries().length} 个有数据的行业门类${state.employment === 'individual' ? ' · 2 类未发布' : ''}`;
+    $('wage-control').hidden = !['wage', 'growth'].includes(state.metric);
+    const configs = {
+      wage: { title: '税前年平均工资', low: '4 万', high: state.ownership === 'private' ? '15 万元' : '25 万元', gradient: 'linear-gradient(to right,#e8f1f7,#153d66)', note: `2025 年${ownershipName()}税前年平均工资，非中位数、非到手收入。${state.employment === 'individual' ? '该工资不代表个体经营户收入。' : ''}`, year: '颜色 · 2025 年' },
+      growth: { title: '工资名义增速', low: '−8%', high: '+8%', gradient: 'linear-gradient(to right,#b55f76,#eef2f5,#226f82)', note: `${ownershipName()}年平均工资，2025 年较 2024 年名义变化；不是就业增长或预测。${state.employment === 'individual' ? '不代表个体经营户收入变化。' : ''}`, year: '颜色 · 2025 / 2024' },
+      female: { title: '女性从业人员占比', low: '0%', high: '75%', gradient: 'linear-gradient(to right,#e5eff6,#57528e)', note: `2023 年经济普查${scopeName()}女性人数 ÷ 本行业从业人数；面积与颜色口径一致。`, year: '颜色 · 2023 年' },
+      ai: { title: '数字 AI 任务暴露 · 模型估计', low: '低 0', high: '10 高', gradient: 'linear-gradient(to right,#67969c,#d7dde3,#92507b)', note: '0–10 分的行业任务粗粒度估计。高分表示潜在重塑，不是失业概率；分数未经实证验证。', year: '估计 · 2026.10' }
+    };
+    const c = configs[state.metric];
+    $('metric-title').textContent = c.title; $('legend-low').textContent = c.low; $('legend-high').textContent = c.high;
+    $('legend-gradient').style.background = c.gradient; $('metric-note').textContent = c.note; $('map-year').textContent = c.year;
+    document.querySelectorAll('[data-metric]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.metric === state.metric)));
+  }
+  function render() { hideTooltip(); renderHeader(); renderMap(); renderDetail(); }
+  function selectIndustry(code) {
+    if (!data.industries.some(d => d.code === code)) throw new Error('未知行业代码');
+    state.selected = code; renderMap(); renderDetail(); hideTooltip();
+  }
+  function showTooltip(d, event) {
+    if (event.pointerType === 'touch') return;
+    $('tooltip').innerHTML = `<strong>${esc(d.name)}</strong><span>从业人员 ${number(count(d))} 万人 · ${scopeName()}</span><br>${esc($('metric-title').textContent)}：${metricText(d)}`;
+    $('tooltip').hidden = false; positionTooltip(event);
+  }
+  function positionTooltip(e) {
+    const t = $('tooltip'); if (t.hidden) return;
+    const left = Math.max(8, Math.min(window.innerWidth - t.offsetWidth - 8, e.clientX + 14));
+    const top = Math.max(8, Math.min(window.innerHeight - t.offsetHeight - 8, e.clientY + 15));
+    t.style.left = `${left}px`; t.style.top = `${top}px`;
+  }
+  function hideTooltip() { $('tooltip').hidden = true; }
+  document.querySelectorAll('[data-metric]').forEach(b => b.addEventListener('click', () => { state.metric = b.dataset.metric; render(); }));
+  $('employment-scope').addEventListener('change', e => {
+    state.employment = e.target.value;
+    if (count(data.industries.find(d => d.code === state.selected)) === null) state.selected = visibleIndustries()[0].code;
+    render();
+  });
+  $('wage-scope').addEventListener('change', e => { state.ownership = e.target.value; render(); });
+  const dialog = $('sources-dialog');
+  $('sources-list').innerHTML = data.sources.map(s => `<div class="source-item"><a href="${s.url}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><p>${esc(s.scope)}</p><p class="source-meta">数据年份 ${s.reference_year} · 发布 ${s.published_at} · 核对 ${s.accessed_at}</p></div>`).join('');
+  $('ai-method').textContent = `${data.ai.method}。${data.ai.limitations}。`;
+  $('ai-prompt').textContent = data.ai.prompt;
+  ['sources-open', 'sources-footer'].forEach(id => $(id).addEventListener('click', () => { hideTooltip(); dialog.showModal(); }));
+  $('sources-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', e => { if (e.target === dialog) { const r = dialog.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close(); } });
+  window.addEventListener('scroll', hideTooltip, { passive: true });
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') hideTooltip(); });
+  new ResizeObserver(renderMap).observe($('treemap'));
+  render();
+  // Share the visible exploration actions with supported WebMCP browsers.
+  const api = {
+    get_state: () => ({ ...state, total_employment_10k: total(), selected_industry: data.industries.find(d => d.code === state.selected), sources: data.sources }),
+    configure_map: input => {
+      if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('需要配置对象');
+      const allowed = { metric: ['wage', 'growth', 'female', 'ai'], employment: ['legal', 'individual'], ownership: ['private', 'nonprivate'] };
+      for (const [key, value] of Object.entries(input)) if (!allowed[key]?.includes(value)) throw new Error(`不支持的配置：${key}`);
+      Object.assign(state, input);
+      $('employment-scope').value = state.employment; $('wage-scope').value = state.ownership;
+      if (count(data.industries.find(d => d.code === state.selected)) === null) state.selected = visibleIndustries()[0].code;
+      render(); return api.get_state();
+    },
+    select_industry: input => { if (!input || typeof input.code !== 'string') throw new Error('需要行业代码'); selectIndustry(input.code); return api.get_state(); }
+  };
+  const ctx = document.modelContext;
+  if (ctx?.registerTool) {
+    const lifetime = new AbortController();
+    const tools = [
+      { name: 'read_china_jobs_map', description: '读取当前中国行业就业地图的状态、选中行业和官方来源。', inputSchema: { type: 'object', properties: {}, additionalProperties: false }, annotations: { readOnlyHint: true }, execute: api.get_state },
+      { name: 'configure_china_jobs_map', description: '切换可见地图的颜色指标、面积口径与工资口径。', inputSchema: { type: 'object', properties: { metric: { enum: ['wage', 'growth', 'female', 'ai'] }, employment: { enum: ['legal', 'individual'] }, ownership: { enum: ['private', 'nonprivate'] } }, additionalProperties: false }, annotations: { readOnlyHint: false }, execute: api.configure_map },
+      { name: 'select_china_jobs_industry', description: '按A至S行业代码，在可见地图中查看该行业详情；不改变数据。', inputSchema: { type: 'object', properties: { code: { type: 'string', enum: data.industries.map(d => d.code) } }, required: ['code'], additionalProperties: false }, annotations: { readOnlyHint: false }, execute: api.select_industry }
+    ];
+    tools.forEach(tool => { try { Promise.resolve(ctx.registerTool(tool, { signal: lifetime.signal })).catch(e => console.warn('WebMCP注册失败', e.message)); } catch (e) { console.warn('WebMCP不可用', e.message); } });
+    window.addEventListener('pagehide', () => lifetime.abort(), { once: true });
+  }
+})();
+</script>
+</body>
+</html>
+
